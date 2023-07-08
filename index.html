@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMpixel</title>
+</head>
+
+<style>
+
+    body {
+        background-color: black;
+        text-align: center;
+        color: white;
+
+    }
+    div {       
+        margin-top: 30%;
+
+
+    }
+    h1 {
+        font-size: 40px;
+    }
+
+    button {
+        border-radius: 50%;
+        font-size: 20px;
+        padding: 20px;
+        cursor: pointer;
+    }
+
+    #redLed {
+
+        background-color: white;
+        color: red;
+    }
+
+    #greenLed {
+
+        background-color: white;
+        color: green;
+    }
+
+    #blueLed {
+
+        background-color: white;
+        color: blue;
+    }
+</style>
+<script>
+    var redLed, greenLed, blueLed;
+    function checkLoaded(){
+        redLed="''' + red_value + '''", greenLed="''' + green_value +'''", blueLed="''' + blue_value + '''";
+        if (redLed == "on") {
+            document.getElementById('redLed').style.backgroundColor = 'red';
+            document.getElementById('redLed').style.color = 'white';
+        }
+
+
+        if (greenLed == "on") {
+            document.getElementById('greenLed').style.backgroundColor = 'green';
+            document.getElementById('greenLed').style.color = 'white';
+        }
+
+        console.log("blueLed: " + blueLed)
+        if (blueLed == "on") {
+            document.getElementById('blueLed').style.backgroundColor = 'blue';
+            document.getElementById('blueLed').style.color = 'white';
+        }
+    }
+
+
+
+    function redButton() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                redLed = this.responseText;
+                console.log('redLed: ' + redLed)
+                if (redLed == 'off')
+                    redLed = 'on';
+                else
+                    redLed = 'off'
+                console.log('redLed: ' + redLed)
+                if (redLed == 'off') {
+                    document.getElementById('redLed').style.backgroundColor = 'black';
+                    document.getElementById('redLed').style.color = 'red';
+
+                }
+                else {
+                    document.getElementById('redLed').style.backgroundColor = 'red';
+                    document.getElementById('redLed').style.color = 'white';
+                    document.getElementById('greenLed').style.backgroundColor = 'white';
+                    document.getElementById('greenLed').style.color = 'green';
+                    document.getElementById('blueLed').style.backgroundColor = 'white';
+                    document.getElementById('blueLed').style.color = 'blue';
+                }
+
+                http = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                    }
+                }
+                xhttp.open('GET', '/?led=red', true);
+                xhttp.send();
+
+            }
+        }
+        xhttp.open('GET', '/getRedLedValue', true);
+        xhttp.send();
+
+
+    }
+    function greenButton() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                greenLed = this.responseText;
+                console.log('greenLed: ' + greenLed)
+                if (greenLed == 'off')
+                    greenLed = 'on';
+                else
+                    greenLed = 'off'
+
+                if (greenLed == 'off') {
+                    document.getElementById('greenLed').style.backgroundColor = 'white';
+                    document.getElementById('greenLed').style.color = 'green';
+                }
+                else {
+                    document.getElementById('greenLed').style.backgroundColor = 'green';
+                    document.getElementById('greenLed').style.color = 'black';
+                    document.getElementById('redLed').style.backgroundColor = 'white';
+                    document.getElementById('redLed').style.color = 'red';
+                    document.getElementById('blueLed').style.backgroundColor = 'white';
+                    document.getElementById('blueLed').style.color = 'blue';
+                }
+
+                http = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                    }
+                }
+                xhttp.open('GET', '/?led=green', true);
+                xhttp.send();
+
+            }
+        }
+        xhttp.open('GET', '/getGreenLedValue', true);
+        xhttp.send();
+
+
+    }
+    function blueButton() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                blueLed = this.responseText;
+                if (blueLed == 'off')
+                    blueLed = 'on';
+                else
+                    blueLed = 'off'
+                console.log('blueLed: ' + blueLed)
+                if (blueLed == 'off') {
+                    document.getElementById('blueLed').style.backgroundColor = 'white';
+                    document.getElementById('blueLed').style.color = 'blue';
+                }
+                else {
+                    document.getElementById('blueLed').style.backgroundColor = 'blue';
+                    document.getElementById('blueLed').style.color = 'white';
+                    document.getElementById('greenLed').style.backgroundColor = 'white';
+                    document.getElementById('greenLed').style.color = 'green';
+                    document.getElementById('redLed').style.backgroundColor = 'white';
+                    document.getElementById('redLed').style.color = 'red';
+                }
+
+                http = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                    }
+                }
+                xhttp.open('GET', '/?led=blue', true);
+                xhttp.send();
+
+
+
+
+            }
+        }
+        xhttp.open('GET', '/getBlueLedValue', true);
+        xhttp.send();
+
+
+
+    }
+</script>
+
+<body onload="checkLoaded()">
+    <div>
+        <h1>SMpixel</h1>
+        <button id="redLed" onclick="redButton()">RED</button><br><br>
+        <button id="greenLed" onclick="greenButton()">GREEN</button><br><br>
+        <button id="blueLed" onclick="blueButton()">BLUE</button><br><br>
+    </div>
+</body>
+
+</html>
